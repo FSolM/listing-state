@@ -14,7 +14,7 @@ function Login() {
     console.log(payload.username)
     bcrypt.hash(payload.password, (Math.floor(Math.random() * 10) + 10))
       .then((hash) => {
-        axios.post('/api/user/create', { user: payload.username, password: hash })
+        axios.post('http://localhost:3001/api/user/create', { username: payload.username, password: hash })
           .then(
             // Success case
             console.log('Success')
