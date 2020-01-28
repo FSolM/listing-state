@@ -2,11 +2,29 @@ import React from 'react';
 
 import { Link } from 'react-router-dom';
 
-function Login() {
-  const handlePayload = () => {
-    // Grabs data from inputs
+import axios from 'axios';
+import bcrypt from 'bcryptjs';
 
-    // Sends axios POST request, searches for user by username
+function Login() {
+  const axiosRequest = (payload) => {
+    axios.post('http://localhost:3001/api/user/login', { username: payload.username })
+      .then((res) => {
+        console.log(bcrypt.compareSync(payload.password, res.data.payload[0].password))
+      })
+      .catch((err) => {
+        // Catches axios error
+        console.log('There was a problem with the axios request');
+        console.log(err)
+      })
+  };
+
+  const getData = () => ({
+    username: document.getElementById('login_user').value,
+    password: document.getElementById('login_password').value,
+  });
+
+  const handlePayload = () => {
+    axiosRequest(getData());
 
     // Returns password, uses bcrypt to compare hashes
 

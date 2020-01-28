@@ -12,19 +12,21 @@ function Signin() {
     password_confirmation: document.getElementById('password_confirmation').value,
   });
 
-  const axiosRequest = (payload) => {
+  const axiosRequest = (payload, hash) => {
+    axios.post('http://localhost:3001/api/user/signin', { username: payload.username, password: hash })
+      .then(
+        // Success case
+        console.log('Success')
+      ).catch((err) => {
+        console.log('Axios error')
+        // Catch Axios error
+      });
+  };
+
+  const bcryptHash = (payload) => {
     console.log(payload.username)
     bcrypt.hash(payload.password, (Math.floor(Math.random() * 10) + 10))
-      .then((hash) => {
-        axios.post('http://localhost:3001/api/user/create', { username: payload.username, password: hash })
-          .then(
-            // Success case
-            console.log('Success')
-          ).catch((err) => {
-            console.log('Axios error')
-            // Catch Axios error
-          })
-      })
+      .then((hash) => { axiosRequest(payload, hash) })
       .catch((err) => {
         console.log('bcrypt error')
         // Catch error
@@ -47,7 +49,7 @@ function Signin() {
 
     if (payload.password === payload.password_confirmation) {
       if (payload.password.length > 6) {
-        axiosRequest(payload);
+        bcryptHash(payload);
       } else {
         // Password is lesser or equal to 6
         // Render msg password must include more than 6 characters
@@ -58,14 +60,11 @@ function Signin() {
       // Render msg password must match
       clearPassword();
     }
-
-    // Clear values
+    clearData();
 
     // Set session
 
     // Route to properties index
-    
-    console.log('Handling payload')
   };
   
   return (
