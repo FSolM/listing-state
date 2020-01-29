@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Link } from 'react-router-dom';
 
 import axios from 'axios';
 import bcrypt from 'bcryptjs';
 
+import session from '../../helpers/session';
+
 import '../../css/Login.css';
 
 function Login() {
+  useEffect(() => {
+    console.log(session.getCurrentUser())
+    if (session.getCurrentUser()) {
+      window.location.href = '/';
+    }
+  });
+
   let [alerts, setAlerts] = useState('');
 
   const getData = () => ({
@@ -22,11 +31,12 @@ function Login() {
 
   const clearPassword = () => { document.getElementById('login_password').value = ''; };
 
-  const handleResponse = (data, password) => {
+  const handleResponse = (data, username, password) => {
     switch(data.code) {
       case 101:
         if (bcrypt.compareSync(password, data.payload[0].password)) {
           clearData();
+          session.setCurrentUser(username);
           window.location.href = '/';
         } else {
           clearPassword();
@@ -47,7 +57,7 @@ function Login() {
 
   const axiosRequest = (payload) => {
     axios.post('http://192.168.1.81:3000/api/user/login', { username: payload.username })
-      .then((res) => { handleResponse(res.data, payload.password); })
+      .then((res) => { handleResponse(res.data, payload.username, payload.password); })
       .catch((err) => {
         console.error(`There was an error in axios ${err}`);
         setAlerts(<div className = 'col-12'>There was a connection error. Try again later</div>);
@@ -74,7 +84,7 @@ function Login() {
         <div className = 'row'>
           <label htmlFor='login_password'>Password</label>
           <input type='password' id='login_password' name='login_password' />
-          <Link to = '/signup'>You don't have an account?</Link>
+          <Link to = '/SignUp'>You don't have an account?</Link>
         </div>
         <div className = 'row'>
           <button>Log me in!</button>
