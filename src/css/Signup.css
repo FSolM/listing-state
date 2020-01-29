@@ -1,0 +1,47 @@
+.container.signup-page {
+  color: #c500cd;
+  padding: 2.5rem 5rem;
+}
+
+.container.signup-page > .row {
+  background-color: #ffffff;
+  padding: 1.5rem;
+}
+
+.container.signup-page > .row > label { padding: 0.5rem 0; }
+
+.container.signup-page > .row > input {
+  color: #858993;
+  margin: 0;
+  padding: 0.5rem;
+  width: 100%;
+}
+
+.container.signup-page > .row > input:focus { outline: none; }
+
+.container.signup-page > .row.alert {
+  color: #a24747;
+  padding: 0;
+}
+
+.container.signup-page > .row:nth-child(5) > a {
+  color: #858993;
+  padding-top: 2rem;
+  text-align: center;
+  width: 100%;
+}
+
+.container.signup-page > .row:nth-child(6) { padding: 1.5rem; }
+
+.container.signup-page > .row:nth-child(6) > button {
+  background-color: #c500cd;
+  border: none;
+  color: #ffffff;
+  font-size: 1.8rem;
+  padding: 1.5rem 2rem;
+  width: 100%;
+}
+
+.container.signup-page > .row:nth-child(6) > button:active { background-color: #7b1e7e }
+
+.container.signup-page > .row:nth-child(6) > button:focus { outline: none; }

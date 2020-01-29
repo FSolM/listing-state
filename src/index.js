@@ -6,6 +6,8 @@ import App from './App';
 
 import * as serviceWorker from './serviceWorker';
 
+import './css/tejuino.css'
+
 ReactDOM.render(
     <BrowserRouter>
       <App />
