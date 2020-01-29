@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Link } from 'react-router-dom';
 
 import axios from 'axios';
 import bcrypt from 'bcryptjs';
 
+import session from '../../helpers/session';
+
 import '../../css/Signup.css';
 
 function Signup() {
+  useEffect(() => {
+    console.log(session.getCurrentUser())
+    if (session.getCurrentUser()) {
+      window.location.href = '/';
+    }
+  });
+
   let [alerts, setAlerts] = useState('');
 
   const getData = () => ({
@@ -27,10 +36,11 @@ function Signup() {
     document.getElementById('password_confirmation').value = '';
   };
 
-  const handleResponse = (data) => {
+  const handleResponse = (data, username) => {
     switch(data.code) {
       case 101:
         clearData();
+        session.setCurrentUser(username);
         window.location.href = '/';
         break;
       case 3003:
@@ -47,7 +57,7 @@ function Signup() {
 
   const axiosRequest = (payload, hash) => {
     axios.post('http://192.168.1.81:3000/api/user/signup', { username: payload.username, password: hash })
-      .then((res) => { handleResponse(res.data) })
+      .then((res) => { handleResponse(res.data, payload.username) })
       .catch((err) => {
         console.error(`There was an error in axios ${err}`);
         setAlerts(<div className = 'col-12'>There was a connection error. Try again later</div>);
