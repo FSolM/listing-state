@@ -1,45 +1,86 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
 import axios from 'axios';
 import bcrypt from 'bcryptjs';
 
+import '../../css/Login.css';
+
 function Login() {
-  const axiosRequest = (payload) => {
-    axios.post('http://localhost:3001/api/user/login', { username: payload.username })
-      .then((res) => {
-        console.log(bcrypt.compareSync(payload.password, res.data.payload[0].password))
-      })
-      .catch((err) => {
-        // Catches axios error
-        console.log('There was a problem with the axios request');
-        console.log(err)
-      })
-  };
+  let [alerts, setAlerts] = useState('');
 
   const getData = () => ({
     username: document.getElementById('login_user').value,
     password: document.getElementById('login_password').value,
   });
 
-  const handlePayload = () => {
+  const clearData = () => {
+    document.getElementById('login_user').value = '';
+    document.getElementById('login_password').value = '';
+  };
+
+  const clearPassword = () => { document.getElementById('login_password').value = ''; };
+
+  const handleResponse = (data, password) => {
+    switch(data.code) {
+      case 101:
+        if (bcrypt.compareSync(password, data.payload[0].password)) {
+          clearData();
+          window.location.href = '/';
+        } else {
+          clearPassword();
+          setAlerts(<div className = 'col-12'>Password is incorrect</div>);
+        }
+        break;
+      case 3001:
+      case 3002:
+        console.error(`Server response: ${data.message}`);
+        setAlerts(<div className = 'col-12'>There was a problem with the server: {data.message}</div>);
+        clearData();
+        break;
+      default:
+        console.error('Unknown answer');
+        break;
+    }
+  };
+
+  const axiosRequest = (payload) => {
+    axios.post('http://192.168.1.81:3000/api/user/login', { username: payload.username })
+      .then((res) => { handleResponse(res.data, payload.password); })
+      .catch((err) => {
+        console.error(`There was an error in axios ${err}`);
+        setAlerts(<div className = 'col-12'>There was a connection error. Try again later</div>);
+        clearPassword();
+      })
+  };
+
+  const handlePayload = (e) => {
+    e.preventDefault();
+
+    setAlerts('');
     axiosRequest(getData());
-
-    // Returns password, uses bcrypt to compare hashes
-
-    // If hashes matched, user is signed in
   };
 
   return (
-    <div className = 'login-page'>
-      <label htmlFor='login_user'>Username</label>
-      <input type='text' id='login_user' name='login_user' />
-      <label htmlFor='login_password'>Password</label>
-      <input type='password' id='login_password' name='login_password' />
-      <button onClick={() => { handlePayload() }}>Log me in!</button>
-      <Link to = '/signin'>You don't have an account?</Link>
-    </div>
+    <form onSubmit = {(e) => { handlePayload(e) }}>
+      <div className = 'container login-page'>
+        <div className = 'row'>Logo</div>
+        <div className = 'row'>
+          <label htmlFor='login_user'>Username</label>
+          <input type='text' id='login_user' name='login_user' />
+        </div>
+        <div className = 'row alert'>{alerts}</div>
+        <div className = 'row'>
+          <label htmlFor='login_password'>Password</label>
+          <input type='password' id='login_password' name='login_password' />
+          <Link to = '/signup'>You don't have an account?</Link>
+        </div>
+        <div className = 'row'>
+          <button>Log me in!</button>
+        </div>
+      </div>
+    </form>
   );
 }
 

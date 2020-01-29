@@ -1,15 +1,15 @@
 import React from 'react';
 
 import { Switch, Route } from 'react-router-dom';
-import Signin from './components/registry/Signin';
+import Signup from './components/registry/Signup';
 import Login from './components/registry/Login';
 
 function App() {
   return (
     <div className="App">
       <Switch>
-        <Route path = '/SignIn'>
-          <Signin />
+        <Route path = '/SignUp'>
+          <Signup />
         </Route>
         <Route path = '/LogIn'>
           <Login />
