@@ -1,11 +1,22 @@
-// ToDo
-// Checks if there's a current user active
-// If active, you cannot enter to LogIn and SignUp pages, redirects to main
-// If not, you cannot access to the app, redirects to LogIn
+export default (() => {
+  // Doesn't matter if it's empty
+  const getCookie = () => {
+    const cookie = document.cookie.split(';')[0];
+    return cookie.substring(9, cookie.length);
+  };
+  
+  const setCookie = (username) => {
+    const date = new Date();
+    document.cookie = `username=${username}; expires=${date.setFullYear(date.getFullYear() + 1)}`;
+  };
 
-// Maybe something to do with cookies like a session saver?
-// Need to add an "Keep session open" in LogIn/SignUp
+  const deleteCookie = () => { document.cookie = `username=; expires=Thu, 18 Dec 2013 12:00:00 UTC`; };
 
-export default {
-  currentUser: null
-};
+  const getCurrentUser = () => getCookie();
+
+  const setCurrentUser = (username) => { setCookie(username); };
+
+  const deleteCurrentUser = () => { deleteCookie(); }
+
+  return { getCurrentUser, setCurrentUser, deleteCurrentUser } 
+})();
