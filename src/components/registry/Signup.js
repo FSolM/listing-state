@@ -7,11 +7,10 @@ import bcrypt from 'bcryptjs';
 
 import session from '../../helpers/session';
 
-import '../../css/Signup.css';
+import '../../css/SignUp.css';
 
-function Signup() {
+function SignUp() {
   useEffect(() => {
-    console.log(session.getCurrentUser())
     if (session.getCurrentUser()) {
       window.location.href = '/';
     }
@@ -115,4 +114,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default SignUp;
