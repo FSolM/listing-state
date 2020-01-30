@@ -1,0 +1,58 @@
+.container.listing-form {
+  color: #c500cd;
+  padding: 2.5rem;
+}
+
+.container.listing-form > .row {
+  background-color: #ffffff;
+  padding: 1.5rem;
+}
+
+.container.listing-form > .row > label { padding: 0.5rem 0; }
+
+.container.listing-form > .row > input,
+.container.listing-form > .row > .col-6 > input,
+.container.listing-form > .row > .col-6 > select {
+  color: #858993;
+  margin: 0;
+  padding: 0.5rem;
+  width: 100%;
+}
+
+.container.listing-form > .row > input:focus { outline: none; }
+
+.container.listing-form > .row > .col-6 {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+}
+
+.container.listing-form > .row > .col-6 > label {
+  font-size: 1.4rem;
+  padding: 0.5rem 0;
+}
+
+.container.listing-form > .row > .col-6 > input,
+.container.listing-form > .row > .col-6 > select { margin: 0.5rem 0; }
+
+.container.listing-form > .row > .col-6 > select { border: none; }
+
+.container.listing-form > .row > .col-6 > input:focus,
+.container.listing-form > .row > .col-6 > select:focus { outline: none; }
+
+.container.listing-form > .row:nth-child(7) > .col-6:nth-child(2) > label { font-size: 1.31rem; }
+
+.container.listing-form > .row:nth-child(8) > button {
+  background-color: #c500cd;
+  border: none;
+  color: #ffffff;
+  font-size: 1.8rem;
+  padding: 1.5rem 2rem;
+  width: 100%;
+}
+
+.container.listing-form > .row:nth-child(8) > button:active { background-color: #7b1e7e }
+
+.container.listing-form > .row:nth-child(8) > button:focus { outline: none; }
