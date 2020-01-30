@@ -76,13 +76,13 @@ function LogIn() {
       <div className = 'container login-page'>
         <div className = 'row'>Logo</div>
         <div className = 'row'>
-          <label htmlFor='login_user'>Username</label>
-          <input type='text' id='login_user' name='login_user' />
+          <label htmlFor = 'login_user'>Username</label>
+          <input type = 'text' id = 'login_user' name = 'login_user' />
         </div>
         <div className = 'row alert'>{alerts}</div>
         <div className = 'row'>
-          <label htmlFor='login_password'>Password</label>
-          <input type='password' id='login_password' name='login_password' />
+          <label htmlFor = 'login_password'>Password</label>
+          <input type = 'password' id = 'login_password' name = 'login_password' />
           <Link to = '/SignUp'>You don't have an account?</Link>
         </div>
         <div className = 'row'>

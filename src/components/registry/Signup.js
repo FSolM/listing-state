@@ -94,16 +94,16 @@ function SignUp() {
         <div className = 'row'>Logo</div>
         <div className = 'row'>
           <label htmlFor='username'>Username</label>
-          <input type='text' id='username' name='username' required />
+          <input type = 'text' id = 'username' name = 'username' required />
         </div>
         <div className = 'row alert'>{alerts}</div>
         <div className = 'row'>
           <label htmlFor='password'>Password</label>
-          <input type='password' id='password' name='password' minLength = '6' required />
+          <input type = 'password' id = 'password' name = 'password' minLength = '6' required />
         </div>
         <div className = 'row'>
-          <label htmlFor='password_confirmation'>Confirm your password</label>
-          <input type='password' id='password_confirmation' name='password_confirmation' minLength = '6' required />
+          <label htmlFor = 'password_confirmation'>Confirm your password</label>
+          <input type = 'password' id = 'password_confirmation' name = 'password_confirmation' minLength = '6' required />
           <Link to = '/LogIn'>You already have an account?</Link>
         </div>
         <div className = 'row'>
