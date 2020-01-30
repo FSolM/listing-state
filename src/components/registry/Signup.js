@@ -36,7 +36,7 @@ function SignUp() {
   };
 
   const handleResponse = (data, username) => {
-    switch(data.code) {
+    switch (data.code) {
       case 101:
         clearData();
         session.setCurrentUser(username);

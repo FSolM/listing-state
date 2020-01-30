@@ -31,7 +31,7 @@ function LogIn() {
   const clearPassword = () => { document.getElementById('login_password').value = ''; };
 
   const handleResponse = (data, username, password) => {
-    switch(data.code) {
+    switch (data.code) {
       case 101:
         if (bcrypt.compareSync(password, data.payload[0].password)) {
           clearData();

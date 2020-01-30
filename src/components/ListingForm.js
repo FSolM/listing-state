@@ -35,21 +35,37 @@ function ListingForm() {
   };
 
   const handleResponse = (data) => {
-    // Does something with the data
+    switch (data.code) {
+      case 101:
+        clearData();
+        window.location.href = '/';
+        break;
+      case 3100:
+        console.error(`Server response: ${data.message}`);
+        clearData();
+        break;
+      default:
+        console.error('Unknown answer');
+        break;
+    }
   };
 
   const axiosRequest = (payload) => {
     axios.post('http://192.168.1.81:3000/api/property/create', { name: payload.name,
                                                                  price: payload.price,
                                                                  description: payload.description,
+                                                                 images: payload.images,
                                                                  location: payload.location,
-                                                                 type: payload.type,
+                                                                 property_type: payload.type,
                                                                  bedrooms: payload.bedrooms,
                                                                  bathrooms: payload.bathrooms,
                                                                  size: payload.size,
                                                                  owner: payload.owner, })
       .then((res) => { handleResponse(res.data); })
-      .catch((err) => { console.error(`There was an error in axios ${err}`); })
+      .catch((err) => {
+        console.error(`There was an error in axios ${err}`);
+        clearData();
+      });
   };
 
   const handlePayload = (e) => {
