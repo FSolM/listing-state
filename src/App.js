@@ -16,11 +16,11 @@ function App() {
         <Route path = '/LogIn'>
           <LogIn />
         </Route>
+        <Route path = '/New-Listing'>
+          <ListingForm />
+        </Route>
         <Route path = '/'>
           <Listing />
-        </Route>
-        <Route path = '/new-listing'>
-          <ListingForm />
         </Route>
       </Switch>
     </div>

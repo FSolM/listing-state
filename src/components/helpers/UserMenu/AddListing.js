@@ -3,7 +3,7 @@ import React from 'react';
 import '../../../css/AddListing.css';
 
 function AddListing() {
-  const handleAddListing = () => { window.location.href = '/new-listing'; };
+  const handleAddListing = () => { window.location.href = '/New-Listing'; };
 
   return (
     <div className = 'btn-addListing'>
