@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import axios from 'axios';
 
@@ -9,18 +9,9 @@ import '../css/ListingForm.css';
 function ListingForm() {
   const renderNumberOptions = () => [1, 2, 3, 4, 5, 6, 7, 8].map((number) => <option value = {number} key = {number}>{number}</option>)
 
-  const getData = () => ({
-    name: document.getElementById('property-name').value,
-    price: document.getElementById('property-price').value,
-    description: document.getElementById('property-description').value,
-    images: document.getElementById('property-images').value,
-    location: document.getElementById('property-address').value,
-    type: document.getElementById('property-type').value,
-    bedrooms: document.getElementById('property-bedrooms').value,
-    bathrooms: document.getElementById('property-bathrooms').value,
-    size: document.getElementById('property-size').value,
-    owner: session.getCurrentUser(),
-  });
+  let [alerts, setAlerts] = useState('');
+
+  const getData = (form) => new FormData(form);
 
   const clearData = () => {
     document.getElementById('property-name').value = '';
@@ -42,6 +33,7 @@ function ListingForm() {
         break;
       case 3100:
         console.error(`Server response: ${data.message}`);
+        setAlerts(<div className = 'col-12'>There was a problem with the server: {data.message}</div>);
         clearData();
         break;
       default:
@@ -51,19 +43,12 @@ function ListingForm() {
   };
 
   const axiosRequest = (payload) => {
-    axios.post('http://192.168.1.81:3000/api/property/create', { name: payload.name,
-                                                                 price: payload.price,
-                                                                 description: payload.description,
-                                                                 images: payload.images,
-                                                                 location: payload.location,
-                                                                 property_type: payload.type,
-                                                                 bedrooms: payload.bedrooms,
-                                                                 bathrooms: payload.bathrooms,
-                                                                 size: payload.size,
-                                                                 owner: payload.owner, })
+    console.log(payload)
+    axios.post('http://192.168.1.81:3000/api/property/create', payload)
       .then((res) => { handleResponse(res.data); })
       .catch((err) => {
         console.error(`There was an error in axios ${err}`);
+        setAlerts(<div className = 'col-12'>There was a connection error. Try again later</div>)
         clearData();
       });
   };
@@ -71,36 +56,37 @@ function ListingForm() {
   const handlePayload = (e) => {
     e.preventDefault();
 
-    axiosRequest(getData());
+    axiosRequest(getData(e.target));
   };
   
   return (
-    <form onSubmit = {(e) => { handlePayload(e) }}>
+    <form encType = 'multipart/form-data' onSubmit = {(e) => { handlePayload(e) }}>
       <div className = 'container listing-form'>
+        <div className = 'row alert'>{alerts}</div>
         <div className = 'row'>
           <label htmlFor = 'property-name'>Property's Name</label>
-          <input type = 'text' id = 'property-name' name = 'property-name' required />
+          <input type = 'text' id = 'property-name' name = 'name' required />
         </div>
         <div className = 'row'>
           <label htmlFor = 'property-price'>Property's Price</label>
-          <input type = 'number' id = 'property-price' name = 'property-price' required />
+          <input type = 'number' id = 'property-price' name = 'price' required />
         </div>
         <div className = 'row'>
           <label htmlFor = 'property-description'>Description</label>
-          <input type = 'text' id = 'property-description' name = 'property-description' />
+          <input type = 'text' id = 'property-description' name = 'description' />
         </div>
         <div className = 'row'>
           <label htmlFor = 'property-images'>Add Images</label>
-          <input type = 'file' id = 'property-images' name = 'property-images' accept = 'image/png, image/jpeg' />
+          <input type = 'file' id = 'property-images' name = 'image' accept = 'image/png, image/jpg, image/jpeg' required />
         </div>
         <div className = 'row'>
           <label htmlFor = 'property-address'>Address</label>
-          <input type = 'text' id = 'property-address' name = 'property-address' required />
+          <input type = 'text' id = 'property-address' name = 'location' required />
         </div>
         <div className = 'row'>
           <div className = 'col-6'>
             <label htmlFor = 'property-type'>Property Type</label>
-            <select id = 'property-type' name = 'property-type'>
+            <select id = 'property-type' name = 'property_type'>
               <option value = 'House'>House</option>
               <option value = 'Apartment'>Apartment</option>
               <option value = 'Loft'>Loft</option>
@@ -108,7 +94,7 @@ function ListingForm() {
           </div>
           <div className = 'col-6'>
             <label htmlFor = 'property-bedrooms'>Bedrooms</label>
-            <select id = 'property-bedrooms' name = 'property-bedrooms' required>
+            <select id = 'property-bedrooms' name = 'bedrooms' required>
               {renderNumberOptions()}
             </select>
           </div>
@@ -116,16 +102,17 @@ function ListingForm() {
         <div className = 'row'>
           <div className = 'col-6'>
             <label htmlFor = 'property-bathrooms'>Bathrooms</label>
-            <select id = 'property-bathrooms' name = 'property-bathrooms' required>
+            <select id = 'property-bathrooms' name = 'bathrooms' required>
               {renderNumberOptions()}
             </select>
           </div>
           <div className = 'col-6'>
             <label htmlFor = 'property-size'>Property Size m<sup>2</sup></label>
-            <input type = 'number' id = 'property-size' name = 'property-size' />
+            <input type = 'number' id = 'property-size' name = 'size' />
           </div>
         </div>
         <div className = 'row'>
+          <input type = 'hidden' id = 'property-owner' name = 'owner' value = {session.getCurrentUser()} />
           <button>Send</button>
         </div>
       </div>
