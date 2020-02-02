@@ -42,9 +42,11 @@
 .container.listing-form > .row > .col-6 > input:focus,
 .container.listing-form > .row > .col-6 > select:focus { outline: none; }
 
-.container.listing-form > .row:nth-child(7) > .col-6:nth-child(2) > label { font-size: 1.31rem; }
+.container.listing-form > .row:nth-child(1) { padding: 0; }
 
-.container.listing-form > .row:nth-child(8) > button {
+.container.listing-form > .row:nth-child(8) > .col-6:nth-child(2) > label { font-size: 1.31rem; }
+
+.container.listing-form > .row:nth-child(9) > button {
   background-color: #c500cd;
   border: none;
   color: #ffffff;
@@ -53,6 +55,6 @@
   width: 100%;
 }
 
-.container.listing-form > .row:nth-child(8) > button:active { background-color: #7b1e7e }
+.container.listing-form > .row:nth-child(9) > button:active { background-color: #7b1e7e }
 
-.container.listing-form > .row:nth-child(8) > button:focus { outline: none; }
+.container.listing-form > .row:nth-child(9) > button:focus { outline: none; }
