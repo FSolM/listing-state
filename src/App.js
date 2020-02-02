@@ -1,20 +1,27 @@
 import React from 'react';
 
 import { Switch, Route } from 'react-router-dom';
-import Signup from './components/registry/Signup';
-import Login from './components/registry/Login';
+import SignUp from './components/registry/SignUp';
+import LogIn from './components/registry/LogIn';
+import Listing from './components/Listing';
+import ListingForm from './components/ListingForm';
 
 function App() {
   return (
     <div className="App">
       <Switch>
         <Route path = '/SignUp'>
-          <Signup />
+          <SignUp />
         </Route>
         <Route path = '/LogIn'>
-          <Login />
+          <LogIn />
         </Route>
-        <Route path = '/'></Route>
+        <Route path = '/New-Listing'>
+          <ListingForm />
+        </Route>
+        <Route path = '/'>
+          <Listing />
+        </Route>
       </Switch>
     </div>
   );

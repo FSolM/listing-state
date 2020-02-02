@@ -1,13 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Link } from 'react-router-dom';
 
 import axios from 'axios';
 import bcrypt from 'bcryptjs';
 
-import '../../css/Signup.css';
+import session from '../../helpers/session';
 
-function Signup() {
+import '../../css/SignUp.css';
+
+function SignUp() {
+  useEffect(() => {
+    if (session.getCurrentUser()) {
+      window.location.href = '/';
+    }
+  });
+
   let [alerts, setAlerts] = useState('');
 
   const getData = () => ({
@@ -27,10 +35,11 @@ function Signup() {
     document.getElementById('password_confirmation').value = '';
   };
 
-  const handleResponse = (data) => {
-    switch(data.code) {
+  const handleResponse = (data, username) => {
+    switch (data.code) {
       case 101:
         clearData();
+        session.setCurrentUser(username);
         window.location.href = '/';
         break;
       case 3003:
@@ -47,7 +56,7 @@ function Signup() {
 
   const axiosRequest = (payload, hash) => {
     axios.post('http://192.168.1.81:3000/api/user/signup', { username: payload.username, password: hash })
-      .then((res) => { handleResponse(res.data) })
+      .then((res) => { handleResponse(res.data, payload.username) })
       .catch((err) => {
         console.error(`There was an error in axios ${err}`);
         setAlerts(<div className = 'col-12'>There was a connection error. Try again later</div>);
@@ -85,16 +94,16 @@ function Signup() {
         <div className = 'row'>Logo</div>
         <div className = 'row'>
           <label htmlFor='username'>Username</label>
-          <input type='text' id='username' name='username' required />
+          <input type = 'text' id = 'username' name = 'username' required />
         </div>
         <div className = 'row alert'>{alerts}</div>
         <div className = 'row'>
           <label htmlFor='password'>Password</label>
-          <input type='password' id='password' name='password' minLength = '6' required />
+          <input type = 'password' id = 'password' name = 'password' minLength = '6' required />
         </div>
         <div className = 'row'>
-          <label htmlFor='password_confirmation'>Confirm your password</label>
-          <input type='password' id='password_confirmation' name='password_confirmation' minLength = '6' required />
+          <label htmlFor = 'password_confirmation'>Confirm your password</label>
+          <input type = 'password' id = 'password_confirmation' name = 'password_confirmation' minLength = '6' required />
           <Link to = '/LogIn'>You already have an account?</Link>
         </div>
         <div className = 'row'>
@@ -105,4 +114,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default SignUp;
