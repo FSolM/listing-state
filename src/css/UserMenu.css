@@ -1,7 +1,8 @@
 .container.user-menu {
+  background-color: #ffffff;
   bottom: 0;
   padding: 2.5rem 1rem;
-  position: absolute;
+  position: sticky;
 }
 
 .container.user-menu > .row { padding: 0; }
