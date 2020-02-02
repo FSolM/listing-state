@@ -48,7 +48,7 @@ function ListingForm() {
       .then((res) => { handleResponse(res.data); })
       .catch((err) => {
         console.error(`There was an error in axios ${err}`);
-        setAlerts(<div className = 'col-12'>There was a connection error. Try again later</div>)
+        setAlerts(<div className = 'col-12'>There was a connection error. Try again later</div>);
         clearData();
       });
   };
