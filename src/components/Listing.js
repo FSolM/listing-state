@@ -33,7 +33,7 @@ function Listing() {
     if (listing.length > 0) {
       let render = [];
       listing.forEach((property) => {
-        render.push(<PropertyThumbnail key = {property.id} image = {property.image} price = {property.price} description = {property.description} />);
+        render.push(<PropertyThumbnail key = {property.id} id = {property.id} image = {property.image} price = {property.price} description = {property.description} />);
       });
       return <div className = 'row'>{render}</div>
     } else {
