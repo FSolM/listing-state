@@ -11,7 +11,7 @@ function UserView() {
     if (!session.getCurrentUser()) {
       window.location.href = '/LogIn';
     }
-  });
+  }, []);
 
   const signOut = () => {
     session.deleteCurrentUser();
