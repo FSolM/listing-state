@@ -55,7 +55,8 @@ function Listing() {
         </div>
       </div>
       <UserMenu />
-    </div>);
+    </div>
+  );
 }
 
 export default Listing;
