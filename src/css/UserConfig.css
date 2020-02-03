@@ -1,0 +1,7 @@
+.btn-userConfig {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-userConfig > svg { fill: #737881; }
