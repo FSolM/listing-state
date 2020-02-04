@@ -10,11 +10,8 @@ function Map(props) {
   useEffect(() => {
     const provider = new EsriProvider();
 
-    console.log(props)
-
     provider.search({ query: props.location })
       .then((res) => {
-        console.log(res[0])
         const map = L.map('map', {
           center: [res[0].y, res[0].x],
           zoom: 17,
@@ -29,7 +26,7 @@ function Map(props) {
     
         L.marker([res[0].y, res[0].x]).addTo(map).bindPopup(props.name).openPopup();
       })
-      .catch((err) => { console.log(`An error was encountered while retrieving location data: ${err}`); })
+      .catch((err) => { console.error(`An error was encountered while retrieving location data: ${err}`); })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

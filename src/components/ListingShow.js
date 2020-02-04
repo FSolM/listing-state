@@ -53,7 +53,7 @@ function ListingShow({ match: { params: { id } } }) {
       window.location.href = '/LogIn';
     } else
     if (id !== 0 && !parseInt(id)) {
-      console.log('What are you doing?')
+      console.error('What are you doing?')
       window.location.href = '/';
     } else {
       axiosRequest();

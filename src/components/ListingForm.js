@@ -43,7 +43,6 @@ function ListingForm() {
   };
 
   const axiosRequest = (payload) => {
-    console.log(payload)
     axios.post('http://192.168.1.81:3000/api/property/create', payload)
       .then((res) => { handleResponse(res.data); })
       .catch((err) => {

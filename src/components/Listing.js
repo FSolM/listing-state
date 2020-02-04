@@ -29,7 +29,6 @@ function Listing() {
   }, []);
 
   const renderListing = () => {
-    console.log(listing)
     if (listing.length > 0) {
       let render = [];
       listing.forEach((property) => {
