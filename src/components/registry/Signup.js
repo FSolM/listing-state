@@ -14,7 +14,7 @@ function SignUp() {
     if (session.getCurrentUser()) {
       window.location.href = '/';
     }
-  });
+  }, []);
 
   let [alerts, setAlerts] = useState('');
 

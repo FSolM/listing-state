@@ -15,7 +15,7 @@ function PropertyThumbnail(props) {
   }
 
   return (
-    <div className = 'col-6 property-thumbnail'>
+    <div className = 'col-6 property-thumbnail' onClick = {() => { window.location.href = `/property/${props.id}`; }}>
       <div className = 'container'>
         <div className = 'row'>
           <div className = 'col-12'><img src = {getURL()} alt = ' Listing Thumbnail' /></div>
@@ -30,6 +30,7 @@ function PropertyThumbnail(props) {
 }
 
 PropertyThumbnail.propTypes = {
+  id: PropTypes.number,
   image: PropTypes.object,
   price: PropTypes.number,
   description: PropTypes.string,
