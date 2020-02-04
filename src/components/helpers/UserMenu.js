@@ -9,7 +9,7 @@ function UserMenu() {
   return (
     <div className = 'container user-menu'>
       <div className = 'row'>
-        <div className = 'col-4 favourites'>Favourites Container</div>
+        <div className = 'col-4 favourites'></div>
         <div className = 'col-4 add-listing'><AddListing /></div>
         <div className = 'col-4 profile'><UserConfig /></div>
       </div>
