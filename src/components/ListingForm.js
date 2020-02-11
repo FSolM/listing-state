@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 
+import { connect } from 'react-redux';
+
 import axios from 'axios';
 
-import session from '../helpers/session';
-
 import '../css/ListingForm.css';
+
+const mapStateToProps = (state) => ({ user: state.user });
 
 function ListingForm() {
   const renderNumberOptions = () => [1, 2, 3, 4, 5, 6, 7, 8].map((number) => <option value = {number} key = {number}>{number}</option>)
@@ -111,7 +113,7 @@ function ListingForm() {
           </div>
         </div>
         <div className = 'row'>
-          <input type = 'hidden' id = 'property-owner' name = 'owner' value = {session.getCurrentUser()} />
+          <input type = 'hidden' id = 'property-owner' name = 'owner' value = {props.user} />
           <button>Send</button>
         </div>
       </div>
@@ -119,4 +121,4 @@ function ListingForm() {
   );
 }
 
-export default ListingForm;
+export default connect(mapStateToProps)(ListingForm);

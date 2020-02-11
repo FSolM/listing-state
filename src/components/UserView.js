@@ -1,20 +1,24 @@
 import React, { useEffect } from 'react';
 
+import { connect } from 'react-redux';
+
 import UserMenu from './helpers/UserMenu';
 
-import session from '../helpers/session';
+import { setSession } from '../../actions/index';
 
 import '../css/UserView.css';
 
+const mapStateToProps = (state) => ({ user: state.user });
+
 function UserView() {
   useEffect(() => {
-    if (!session.getCurrentUser()) {
+    if (props.user) {
       window.location.href = '/LogIn';
     }
   }, []);
 
   const signOut = () => {
-    session.deleteCurrentUser();
+    setSession('');
     window.location.href = '/LogIn';
   };
 
@@ -29,4 +33,4 @@ function UserView() {
   );
 }
 
-export default UserView;
+export default connect(mapStateToProps)(UserView);
