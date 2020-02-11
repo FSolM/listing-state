@@ -107,7 +107,7 @@ function ListingForm() {
           </div>
           <div className = 'col-6'>
             <label htmlFor = 'property-size'>Property Size m<sup>2</sup></label>
-            <input type = 'number' id = 'property-size' name = 'size' />
+            <input type = 'number' id = 'property-size' name = 'size' required />
           </div>
         </div>
         <div className = 'row'>
