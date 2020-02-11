@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 
+import { connect } from 'react-redux';
+
 import UserMenu from './helpers/UserMenu';
 import PropertyThumbnail from './helpers/PropertyThumbnail';
 
 import axios from 'axios';
 
-import session from '../helpers/session';
-
 import '../css/Listing.css';
+
+const mapStateToProps = (state) => ({ user: state.user });
 
 function Listing() {
   let [listing, setListing] = useState([]);
@@ -58,4 +60,4 @@ function Listing() {
   );
 }
 
-export default Listing;
+export default connect(mapStateToProps)(Listing);

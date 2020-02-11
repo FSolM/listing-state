@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 
+import { connect } from 'react-redux';
+
 import Map from './helpers/Map';
 
 import axios from 'axios';
 
-import session from '../helpers/session';
-
 import '../css/ListingShow.css';
+
+const mapStateToProps = (state) => ({ user: state.user });
 
 function ListingShow({ match: { params: { id } } }) {
   let [listing, setListing] = useState({
@@ -49,7 +51,7 @@ function ListingShow({ match: { params: { id } } }) {
   };
 
   useEffect(() => {
-    if (!session.getCurrentUser()) {
+    if (props.user) {
       window.location.href = '/LogIn';
     } else
     if (id !== 0 && !parseInt(id)) {
@@ -58,7 +60,6 @@ function ListingShow({ match: { params: { id } } }) {
     } else {
       axiosRequest();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleDeletion = () => {
@@ -67,7 +68,7 @@ function ListingShow({ match: { params: { id } } }) {
       .catch((err) => { console.error(`There was an error in axios ${err}`); })
   };
 
-  const renderDelete = () => session.getCurrentUser() === listing.owner ? <button onClick = {() => { handleDeletion() }}>Delete</button> : '';
+  const renderDelete = () => props.user === listing.owner ? <button onClick = {() => { handleDeletion() }}>Delete</button> : '';
 
   const getMonth = (month) => {
     switch (month) {
@@ -163,4 +164,4 @@ function ListingShow({ match: { params: { id } } }) {
   );
 }
 
-export default ListingShow
+export default connect(mapStateToProps)(ListingShow)

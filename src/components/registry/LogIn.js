@@ -2,16 +2,20 @@ import React, { useState, useEffect } from 'react';
 
 import { Link } from 'react-router-dom';
 
+import { connect } from 'react-redux';
+
 import axios from 'axios';
 import bcrypt from 'bcryptjs';
 
-import session from '../../helpers/session';
+import { setSession } from '../../actions/index';
 
 import '../../css/LogIn.css';
 
+const mapStateToProps = (state) => ({ user: state.user });
+
 function LogIn() {
   useEffect(() => {
-    if (session.getCurrentUser()) {
+    if (props.user) {
       window.location.href = '/';
     }
   }, []);
@@ -35,7 +39,7 @@ function LogIn() {
       case 101:
         if (bcrypt.compareSync(password, data.payload[0].password)) {
           clearData();
-          session.setCurrentUser(username);
+          setSession(username);
           window.location.href = '/';
         } else {
           clearPassword();
@@ -95,4 +99,4 @@ function LogIn() {
   );
 }
 
-export default LogIn;
+export default connect(mapStateToProps)(LogIn);

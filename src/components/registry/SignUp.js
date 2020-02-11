@@ -2,16 +2,20 @@ import React, { useState, useEffect } from 'react';
 
 import { Link } from 'react-router-dom';
 
+import { connect } from 'react-redux';
+
 import axios from 'axios';
 import bcrypt from 'bcryptjs';
 
-import session from '../../helpers/session';
+import { setSession } from '../../actions/index';
 
 import '../../css/SignUp.css';
 
+const mapStateToProps = (state) => ({ user: state.user });
+
 function SignUp() {
   useEffect(() => {
-    if (session.getCurrentUser()) {
+    if (props.user) {
       window.location.href = '/';
     }
   }, []);
@@ -39,7 +43,7 @@ function SignUp() {
     switch (data.code) {
       case 101:
         clearData();
-        session.setCurrentUser(username);
+        setSession(username);
         window.location.href = '/';
         break;
       case 3003:
@@ -116,4 +120,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default connect(mapStateToProps)(SignUp);
