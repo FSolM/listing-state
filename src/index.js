@@ -5,21 +5,21 @@ import { BrowserRouter } from 'react-router-dom';
 
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import sessionReducer from './reducers/session';
+import rootReducer from './reducers/index';
 
 import App from './App';
 
 import * as serviceWorker from './serviceWorker';
 
-const store = createStore(sessionReducer)
-
 import './css/tejuino.css'
 
+const store = createStore(rootReducer)
+
 ReactDOM.render(
-    <Provider store = { store }>
-      <BrowserRouter>
+    <BrowserRouter>
+      <Provider store = {store}>
         <App />
-      </BrowserRouter>
-    </Provider>, document.getElementById('root'));
+      </Provider>
+    </BrowserRouter>, document.getElementById('root'));
 
 serviceWorker.register();
