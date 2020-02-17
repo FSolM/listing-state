@@ -11,7 +11,7 @@ import { setSession } from '../../actions/index';
 
 import '../../css/LogIn.css';
 
-const mapStateToProps = (state) => ({ user: state.user });
+const mapStateToProps = (state) => ({ user: state.session.user });
 
 function LogIn(props) {
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ function LogIn(props) {
   let [alerts, setAlerts] = useState('');
 
   useEffect(() => {
-    if (props.user) {
+    if (!props.user) {
       window.location.href = '/';
     }
   }, [props.user]);

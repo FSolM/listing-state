@@ -8,13 +8,13 @@ import { setSession } from '../actions/index';
 
 import '../css/UserView.css';
 
-const mapStateToProps = (state) => ({ user: state.user });
+const mapStateToProps = (state) => ({ user: state.session.user });
 
 function UserView(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (props.user) {
+    if (!props.user) {
       window.location.href = '/LogIn';
     }
   }, [props.user]);

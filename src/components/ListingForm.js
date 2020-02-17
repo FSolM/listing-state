@@ -57,10 +57,6 @@ function ListingForm(props) {
   const handlePayload = (e) => {
     e.preventDefault();
 
-    console.log('Props')
-    console.log(props)
-    console.log(getData(e.target))
-
     axiosRequest(getData(e.target));
   };
   

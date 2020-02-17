@@ -8,9 +8,9 @@ import axios from 'axios';
 
 import '../css/ListingShow.css';
 
-const mapStateToProps = (state) => ({ user: state.user });
+const mapStateToProps = (state) => ({ user: state.session.user });
 
-function ListingShow({ match: { params: { id } } }, ...props) {
+function ListingShow(props) {
   let [listing, setListing] = useState({
     name: '',
     description: '',
@@ -42,7 +42,7 @@ function ListingShow({ match: { params: { id } } }, ...props) {
   };
 
   const axiosRequest = () => {
-    axios.get(`http://192.168.1.81:3000/api/property/${id}`)
+    axios.get(`http://192.168.1.81:3000/api/property/${props.match.params.id}`)
       .then((res) => { handleResponse(res.data); })
       .catch((err) => {
         console.error(`There was an error in axios ${err}`);
@@ -51,10 +51,10 @@ function ListingShow({ match: { params: { id } } }, ...props) {
   };
 
   useEffect(() => {
-    if (props.user) {
+    if (!props.user) {
       window.location.href = '/LogIn';
     } else
-    if (id !== 0 && !parseInt(id)) {
+    if (props.match.params.id !== 0 && !parseInt(props.match.params.id)) {
       console.error('What are you doing?')
       window.location.href = '/';
     } else {
@@ -69,7 +69,9 @@ function ListingShow({ match: { params: { id } } }, ...props) {
       .catch((err) => { console.error(`There was an error in axios ${err}`); })
   };
 
-  const renderDelete = () => props.user === listing.owner ? <button onClick = {() => { handleDeletion() }}>Delete</button> : '';
+  const renderDelete = () => {
+    return props.user === listing.owner ? <button onClick = {() => { handleDeletion() }}>Delete</button> : ''
+  };
 
   const getMonth = (month) => {
     switch (month) {
