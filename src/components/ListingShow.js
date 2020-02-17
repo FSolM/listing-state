@@ -10,7 +10,7 @@ import '../css/ListingShow.css';
 
 const mapStateToProps = (state) => ({ user: state.user });
 
-function ListingShow({ match: { params: { id } } }) {
+function ListingShow({ match: { params: { id } } }, ...props) {
   let [listing, setListing] = useState({
     name: '',
     description: '',
@@ -60,7 +60,8 @@ function ListingShow({ match: { params: { id } } }) {
     } else {
       axiosRequest();
     }
-  }, []);
+    // eslint-disable-next-line
+  }, [props.user]);
 
   const handleDeletion = () => {
     axios.delete(`http://192.168.1.81:3000/api/property/${listing.id}`)
@@ -111,7 +112,7 @@ function ListingShow({ match: { params: { id } } }) {
   return (
     <div className = 'listing-show'>
       <div className = 'container'>
-        <div className = 'row banner-image'><img src = {`http://192.168.1.81:3000${listing.image.url}`} alt = {listing.image.url} /></div>
+        <div className = 'row banner-image'><img src = {listing.image.url} alt = {listing.image.url} /></div>
         <div className = 'row prices'>
           <div className = 'col-6'>$ {listing.price}</div>
           <div className = 'col-6'>{renderDelete()}</div>

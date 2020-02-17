@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import '../../css/PropertyThumbnail.css';
 
 function PropertyThumbnail(props) {
-  const getURL = () => `http://192.168.1.81:3000${props.image.url}`;
-
   const getDescription = () => {
     if (props.description.length > 25) {
       return `${props.description.substring(0, 25)}...`;
@@ -18,7 +16,7 @@ function PropertyThumbnail(props) {
     <div className = 'col-6 property-thumbnail' onClick = {() => { window.location.href = `/property/${props.id}`; }}>
       <div className = 'container'>
         <div className = 'row'>
-          <div className = 'col-12'><img src = {getURL()} alt = ' Listing Thumbnail' /></div>
+          <div className = 'col-12'><img src = {props.image.url} alt = ' Listing Thumbnail' /></div>
         </div>
         <div className = 'row'>
           <div className = 'col-12'>$ {props.price}</div>

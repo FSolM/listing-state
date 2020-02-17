@@ -1,24 +1,26 @@
 import React, { useEffect } from 'react';
 
-import { connect } from 'react-redux';
+import { useDispatch, connect } from 'react-redux';
 
 import UserMenu from './helpers/UserMenu';
 
-import { setSession } from '../../actions/index';
+import { setSession } from '../actions/index';
 
 import '../css/UserView.css';
 
 const mapStateToProps = (state) => ({ user: state.user });
 
-function UserView() {
+function UserView(props) {
+  const dispatch = useDispatch();
+
   useEffect(() => {
     if (props.user) {
       window.location.href = '/LogIn';
     }
-  }, []);
+  }, [props.user]);
 
   const signOut = () => {
-    setSession('');
+    dispatch(setSession(''));
     window.location.href = '/LogIn';
   };
 

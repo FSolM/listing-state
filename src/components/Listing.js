@@ -11,14 +11,14 @@ import '../css/Listing.css';
 
 const mapStateToProps = (state) => ({ user: state.user });
 
-function Listing() {
+function Listing(props) {
   let [listing, setListing] = useState([]);
   let [alerts, setAlerts] = useState('');
 
   const handleResponse = (listings) => { setListing(listings); };
 
   useEffect(() => {
-    if (!session.getCurrentUser()) {
+    if (props.user) {
       window.location.href = '/LogIn';
     } else {
       axios.get('http://192.168.1.81:3000/api/properties')
@@ -28,9 +28,10 @@ function Listing() {
           setAlerts(<div className = 'col-12'>There was a connection error. Try again later</div>);
         });
     }
-  }, []);
+  }, [props.user]);
 
   const renderListing = () => {
+    console.log(listing)
     if (listing.length > 0) {
       let render = [];
       listing.forEach((property) => {

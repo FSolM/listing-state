@@ -6,9 +6,9 @@ import axios from 'axios';
 
 import '../css/ListingForm.css';
 
-const mapStateToProps = (state) => ({ user: state.user });
+const mapStateToProps = (state) => ({ user: state.session.user });
 
-function ListingForm() {
+function ListingForm(props) {
   const renderNumberOptions = () => [1, 2, 3, 4, 5, 6, 7, 8].map((number) => <option value = {number} key = {number}>{number}</option>)
 
   let [alerts, setAlerts] = useState('');
@@ -56,6 +56,10 @@ function ListingForm() {
 
   const handlePayload = (e) => {
     e.preventDefault();
+
+    console.log('Props')
+    console.log(props)
+    console.log(getData(e.target))
 
     axiosRequest(getData(e.target));
   };

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { Link } from 'react-router-dom';
 
-import { connect } from 'react-redux';
+import { useDispatch, connect } from 'react-redux';
 
 import axios from 'axios';
 import bcrypt from 'bcryptjs';
@@ -13,14 +13,16 @@ import '../../css/SignUp.css';
 
 const mapStateToProps = (state) => ({ user: state.user });
 
-function SignUp() {
+function SignUp(props) {
+  const dispatch = useDispatch();
+
+  let [alerts, setAlerts] = useState('');
+
   useEffect(() => {
     if (props.user) {
       window.location.href = '/';
     }
-  }, []);
-
-  let [alerts, setAlerts] = useState('');
+  }, [props.user]);
 
   const getData = () => ({
     username: document.getElementById('username').value,
@@ -43,7 +45,7 @@ function SignUp() {
     switch (data.code) {
       case 101:
         clearData();
-        setSession(username);
+        dispatch(setSession(username));
         window.location.href = '/';
         break;
       case 3003:
