@@ -1,9 +1,9 @@
 # Listing State
 ### A React PWA that allows you to see and upload property listings
 
-You can catch the app at 
+You can catch the app at [Heroku](https://thawing-island-88859.herokuapp.com)
 
-Favourites coming soon...
+Favourites coming soon..., maybe?
 
 ## Usage & Installation
 
