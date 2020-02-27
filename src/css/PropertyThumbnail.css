@@ -1,0 +1,38 @@
+.col-6.property-thumbnail {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+.col-6.property-thumbnail > .container {
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  height: 25rem;
+  padding: 0;
+}
+
+.col-6.property-thumbnail > .container > .row:nth-child(1) {
+  height: 75%;
+  padding: 0;
+}
+
+.col-6.property-thumbnail > .container > .row:nth-child(1) > .col-12 { height: 100%; }
+
+.col-6.property-thumbnail > .container > .row:nth-child(1) > .col-12 > img {
+  border-radius: 0.5rem 0.5rem 0 0;
+  height: 100%;
+  object-fit: cover;
+}
+
+.col-6.property-thumbnail > .container > .row:nth-child(2) {
+  height: 25%;
+  padding: 0.5rem;
+}
+
+.col-6.property-thumbnail > .container > .row:nth-child(2) > .col-12:nth-child(1) {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.col-6.property-thumbnail > .container > .row:nth-child(2) > .col-12:nth-child(2) { font-size: 1rem; }

@@ -1,0 +1,32 @@
+div.listing {
+  padding: 1rem 1rem 0 1rem;
+}
+
+div.listing > .container:nth-child(1) {
+  background-color: #f4f5f7;
+  min-height: 100vh;
+  padding: 0;
+}
+
+div.listing > .container:nth-child(1) > .row,
+div.listing > .container:nth-child(1) > .row:nth-child(3) > .container,
+div.listing > .container:nth-child(1) > .row:nth-child(3) > .container > .row { padding: 0; }
+
+div.listing > .container:nth-child(1) > .row.alert {
+  color: #a24747;
+  text-align: center;
+}
+
+div.listing > .container:nth-child(1) > .row.banner {
+  background-color: #ffffff;
+  font-size: 2.5rem;
+  font-weight: bold;
+  padding: 1rem;
+}
+
+div.listing > .container:nth-child(1) > .row:nth-child(3) > .container > .row > .col-12.empty-msg {
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 1rem;
+  text-align: center;
+}
