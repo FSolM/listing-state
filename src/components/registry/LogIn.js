@@ -19,7 +19,7 @@ function LogIn(props) {
   let [alerts, setAlerts] = useState('');
 
   useEffect(() => {
-    if (!props.user) {
+    if (props.user) {
       window.location.href = '/';
     }
   }, [props.user]);
