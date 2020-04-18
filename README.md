@@ -1,39 +1,71 @@
 # Listing State
-### A React PWA that allows you to see and upload property listings
 
-You can catch the app at [Heroku](https://thawing-island-88859.herokuapp.com)
+#### A React PWA that allows you to see and upload property listings
 
-Favourites coming soon..., maybe?
+## About
 
-## Usage & Installation
+This React project works as a template for a Property Listing application. It lets users upload new properties to a catalog, and allows for property browsing.
 
-Currently there's not a direct link to download the PWA, so visit the upper link and save the page to home
+As mentioned earlier, this application must be taken as a template for a bigger project.
 
-## Dev Environment
+## Details
 
-`IMPORTANT: Start Rails server first`
+The applications comes with a `Ruby on Rails` API server counterpart that won't be listed here for security measures
+
+You can catch the app here [Heroku](https://thawing-island-88859.herokuapp.com)
+
+## Installation
+
+Install this app as any React project.
+
+### Dev Environment
+
+**IMPORTANT: Start Rails server first**
 
 If you wanna test the app in a local environment:
 
-Install the necessary Node packages
+Install the necessary Node packages with the command
 
 ```
-$ npm i
+$ npm install
 ```
+
+or
+
 ```
 $ yarn install
 ```
 
-Run the project
+To run the project execute
 
 ```
 $ npm run start
 ```
 
-If you have Rails already running (as you should), React tell you that the default port `3000` is already being occupied and will ask you if you wanna change it, just press `y`
+If you have Rails already running (as you should), React tell you that the default port `3000` is already being occupied and will ask you if you wanna change it, just press `y`.
 
-The app should be visible in your network in the port `3001`
+The app should be visible in your network in the port `3001`.
 
-#### Created by:
+## Screenshots
+
+![Screenshot 1](/screenshots/ListingState1.jpg)
+
+![Screenshot 2](/screenshots/ListingState2.jpg)
+
+![Screenshot 3](/screenshots/ListingState3.jpg)
+
+![Screenshot 4](/screenshots/ListingState4.jpg)
+
+## Known Issues
+
+There may be some scaling problems in the Desktop version.
+
+## Planned Implementations
+
+- Better scaling for desktop version
+- Favourites
+- Admin control & privileges
+
+## Contact
 
 Carlos Sol: [@FSolM](https://github.com/FSolM)
